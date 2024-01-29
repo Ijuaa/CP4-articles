@@ -3,12 +3,19 @@ import ReactDOM from "react-dom/client";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import App from "./App";
+import CreateArticle from "./pages/CreateArticle";
+import Home from "./pages/Home";
+
+import "./styles/root.scss";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <Home />,
+  },
+  {
+    path: "/create",
+    element: <CreateArticle />,
   },
 ]);
 

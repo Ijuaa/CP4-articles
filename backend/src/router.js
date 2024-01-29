@@ -2,12 +2,13 @@ const express = require("express");
 
 const router = express.Router();
 
+const uploadFile = require("./middlewares/multer");
 /* ************************************************************************* */
 // Define Your API Routes Here
 /* ************************************************************************* */
 
 // Import itemControllers module for handling item-related operations
-const itemControllers = require("./controllers/itemControllers");
+/* const itemControllers = require("./controllers/itemControllers");
 
 // Route to get a list of items
 router.get("/items", itemControllers.browse);
@@ -17,6 +18,15 @@ router.get("/items/:id", itemControllers.read);
 
 // Route to add a new item
 router.post("/items", itemControllers.add);
+ */
+/* ************************************************************************* */
+
+const articleControllers = require("./controllers/articlesControllers");
+
+router.get("/articles", articleControllers.browse);
+router.get("/articles/:id", articleControllers.read);
+router.get("/articles-home", articleControllers.browseLastFive);
+router.post("/articles", uploadFile.single("image"), articleControllers.add);
 
 /* ************************************************************************* */
 
