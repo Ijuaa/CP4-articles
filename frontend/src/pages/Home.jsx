@@ -22,7 +22,7 @@ function Home() {
   const formatDate = (date) => {
     return date.split("T")[0].split("-").reverse().join("/");
   };
-
+  console.info(latestArticles);
   return (
     <div>
       <Navbar />
