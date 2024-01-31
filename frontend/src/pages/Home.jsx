@@ -19,18 +19,24 @@ function Home() {
       });
   }, []);
 
+  const formatDate = (date) => {
+    return date.split("T")[0].split("-").reverse().join("/");
+  };
+
   return (
     <div>
       <Navbar />
-      <div className="container ml-64">
+      <div className="home-wrapper container absolute ml-[15%]">
         <ul>
           {latestArticles.map((article) => (
             <div className="uniArticle mt-5">
               <li key={article.id}>
-                <div className="ml-[5%] mt-[2%] flex items-center absolute">
-                  <h2 className="font-extrabold text-xl w-80">{article.titre}</h2>
+                <div className="titre-wrapper ml-[5%] mt-[4%] flex items-center flex-wrap absolute">
+                  <h2 className="font-extrabold text-xl w-80">
+                    {article.titre}
+                  </h2>
                 </div>
-                <div className="flex justify-center items-center">
+                <div className="frame-article flex justify-center items-center">
                   <img
                     className="w-1/3 h-1/3 mr-10 ml-6"
                     src={`${import.meta.env.VITE_BACKEND_URL}${
@@ -48,7 +54,7 @@ function Home() {
                   </div>
                 </div>
                 <p>{article.auteur}</p>
-                <p>{article.date_publication}</p>
+                <p>{formatDate(`${article.date_publication}`)}</p>
               </li>
             </div>
           ))}
