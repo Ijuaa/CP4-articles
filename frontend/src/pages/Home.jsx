@@ -22,29 +22,28 @@ function Home() {
   const formatDate = (date) => {
     return date.split("T")[0].split("-").reverse().join("/");
   };
-  console.info(latestArticles);
+
   return (
     <div>
-      <Navbar />
       <div className="home-wrapper container absolute ml-[15%]">
         <ul>
           {latestArticles.map((article) => (
             <div className="uniArticle mt-5">
               <li key={article.id}>
-                <div className="titre-wrapper ml-[5%] mt-[4%] flex items-center flex-wrap absolute">
-                  <h2 className="font-extrabold text-xl w-80">
-                    {article.titre}
-                  </h2>
-                </div>
                 <div className="frame-article flex justify-center items-center">
                   <img
-                    className="w-1/3 h-1/3 mr-10 ml-6"
+                    className="w-96 h-1/3 mr-10 ml-6"
                     src={`${import.meta.env.VITE_BACKEND_URL}${
                       article.image_url
                     }`}
                     alt={article.titre}
                   />
                   <div className="max-w-[80%] mt-10 max-h-screen overflow-auto">
+                    <div className="titre-wrapper flex justify-center mb-4 items-center">
+                      <h2 className="font-extrabold text-xl w-80">
+                        {article.titre}
+                      </h2>
+                    </div>
                     <div
                       // eslint-disable-next-line react/no-danger
                       dangerouslySetInnerHTML={{

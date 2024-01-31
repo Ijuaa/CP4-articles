@@ -22,14 +22,8 @@ class ArticlesManager extends AbstractManager {
 
   async create(article) {
     const [result] = await this.database.query(
-      `INSERT INTO ${this.table} (titre, contenu, auteur, categorie, image_url) VALUES (?, ?, ?, ?, ?)`,
-      [
-        article.titre,
-        article.contenu,
-        article.auteur,
-        article.categorie,
-        article.image_url,
-      ]
+      `INSERT INTO ${this.table} (titre, contenu, auteur_id, image_url) VALUES (?, ?, ?, ?)`,
+      [article.titre, article.contenu, article.auteur_id, article.image_url]
     );
     return result.insertId;
   }

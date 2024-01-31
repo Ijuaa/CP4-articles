@@ -30,4 +30,12 @@ router.post("/articles", uploadFile.single("image"), articleControllers.add);
 
 /* ************************************************************************* */
 
+const userControllers = require("./controllers/userControllers");
+
+router.get("/users", userControllers.browse);
+router.get("/users/:id", userControllers.read);
+router.get("/users/pseudo/:pseudo", userControllers.userPseudoFinder);
+router.post("/users", userControllers.add);
+/* ************************************************************************* */
+
 module.exports = router;

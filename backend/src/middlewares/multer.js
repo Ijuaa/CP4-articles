@@ -10,7 +10,7 @@ const storage = multer.diskStorage({
       null,
       `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`
     );
-  },
+  }
 });
 
 const uploadFile = multer({ storage });
