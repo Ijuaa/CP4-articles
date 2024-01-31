@@ -5,7 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import CreateArticle from "./pages/CreateArticle";
 import Home from "./pages/Home";
-
+import Page404 from "./pages/Page404";
 import "./styles/root.scss";
 
 const router = createBrowserRouter([
@@ -17,6 +17,7 @@ const router = createBrowserRouter([
     path: "/create",
     element: <CreateArticle />,
   },
+  { path: "*", element: <Page404 /> },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

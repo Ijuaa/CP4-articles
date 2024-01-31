@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
+import DOMPurify from "dompurify";
+
 import Navbar from "../components/Navbar";
 import backEnd from "../services/backEnd";
-import s from "../styles/home.module.scss";
+import "../styles/home.scss";
 
 function Home() {
   const [latestArticles, setLatestArticles] = useState([]);
@@ -20,20 +22,35 @@ function Home() {
   return (
     <div>
       <Navbar />
-      <div className={s.container}>
-        <h1>Home</h1>
+      <div className="container ml-64">
         <ul>
           {latestArticles.map((article) => (
-            <li key={article.id}>
-              <h2>{article.titre}</h2>
-              <img
-                src={`${import.meta.env.VITE_BACKEND_URL}${article.image_url}`}
-                alt={article.titre}
-              />
-              <p>{article.contenu}</p>
-              <p>{article.auteur}</p>
-              <p>{article.date_publication}</p>
-            </li>
+            <div className="uniArticle mt-5">
+              <li key={article.id}>
+                <div className="ml-[5%] mt-[2%] flex items-center absolute">
+                  <h2 className="font-extrabold text-xl w-80">{article.titre}</h2>
+                </div>
+                <div className="flex justify-center items-center">
+                  <img
+                    className="w-1/3 h-1/3 mr-10 ml-6"
+                    src={`${import.meta.env.VITE_BACKEND_URL}${
+                      article.image_url
+                    }`}
+                    alt={article.titre}
+                  />
+                  <div className="max-w-[80%] mt-10 max-h-screen overflow-auto">
+                    <div
+                      // eslint-disable-next-line react/no-danger
+                      dangerouslySetInnerHTML={{
+                        __html: DOMPurify.sanitize(article.contenu),
+                      }}
+                    />
+                  </div>
+                </div>
+                <p>{article.auteur}</p>
+                <p>{article.date_publication}</p>
+              </li>
+            </div>
           ))}
         </ul>
       </div>

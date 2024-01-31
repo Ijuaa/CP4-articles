@@ -1,0 +1,23 @@
+.titre {
+  text-align: center;
+  font-size: 2.5rem;
+}
+
+
+input, .categorie {
+  background-color: rgba(211, 211, 211, 0.553);
+  border: 1px solid black;
+  box-shadow: 0.5px 1px 1px 1px rgb(167, 167, 167);
+}
+
+.quill {
+  height: 600px;
+}
+
+.button-envoyer {
+  margin-left: 50%;
+  @media screen and (max-width: 768px) {
+    margin-left: 10%;
+    
+  }
+}
