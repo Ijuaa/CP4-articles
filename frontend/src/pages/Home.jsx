@@ -13,6 +13,7 @@ function Home() {
     backEnd
       .get("/articles-home")
       .then((res) => {
+        console.log(res.data);
         setLatestArticles(res.data);
       })
       .catch((err) => {
@@ -42,6 +43,7 @@ function Home() {
                   <h2 className="font-extrabold text-2xl mb-4 pl-10 pt-8 underline">
                     {article.titre}
                   </h2>
+                  <p className="mb-2">Par : {article.auteur_pseudo}</p>
                   <div
                     className="contenu-wrapper overflow-auto p-8"
                     dangerouslySetInnerHTML={{

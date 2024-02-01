@@ -12,6 +12,13 @@ class ArticlesManager extends AbstractManager {
     return result;
   }
 
+  async readAllWithAuthor() {
+    const [result] = await this.database.query(
+      `Select articles.*, utilisateurs.pseudo FROM ${this.table} JOIN utilisateurs ON articles.auteur_id = utilisateurs.id order by articles.date_publication DESC`
+    );
+    return result;
+  }
+
   async read(id) {
     const [result] = await this.database.query(
       `SELECT * from ${this.table} WHERE id = ?`,
@@ -31,6 +38,13 @@ class ArticlesManager extends AbstractManager {
   async lastFive() {
     const [result] = await this.database.query(
       `SELECT * FROM ${this.table} ORDER BY date_publication DESC LIMIT 5`
+    );
+    return result;
+  }
+
+  async lastFiveWithAuthor() {
+    const [result] = await this.database.query(
+      `Select articles.*, utilisateurs.pseudo AS auteur_pseudo FROM ${this.table} JOIN utilisateurs ON articles.auteur_id = utilisateurs.id order by articles.date_publication DESC LIMIT 5`
     );
     return result;
   }

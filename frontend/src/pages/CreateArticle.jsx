@@ -36,19 +36,25 @@ function CreateArticle() {
         formData.append(key, article[key]);
       }
     }
+    const token = localStorage.getItem("token");
 
-    try {
-      await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/articles`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-    } catch (err) {
-      console.error(err);
+    if (token) {
+      try {
+        await axios.post(
+          `${import.meta.env.VITE_BACKEND_URL}/api/articles`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+      } catch (err) {
+        console.error(err);
+      }
+    } else {
+      console.error("No token found");
     }
   };
 

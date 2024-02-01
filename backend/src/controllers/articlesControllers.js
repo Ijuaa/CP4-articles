@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const tables = require("../tables");
 
 const browse = async (req, res, next) => {
@@ -24,10 +25,13 @@ const read = async (req, res, next) => {
 };
 
 const add = async (req, res, next) => {
-  const article = req.body;
-  if (req.file) {
-    article.image_url = `/uploads/${req.file.filename}`;
-  }
+  const auteur_id = req.user.id;
+  const article = {
+    titre: req.body.titre,
+    contenu: req.body.contenu,
+    auteur_id,
+    image_url: req.file ? `/uploads/${req.file.filename}` : "",
+  };
   try {
     const insertId = await tables.articles.create(article);
     res.status(201).json({ insertId, imageUrl: article.image_url });
@@ -36,10 +40,11 @@ const add = async (req, res, next) => {
   }
 };
 
-const browseLastFive = async (req, res, next) => {
+const browseLastFiveWithAuthor = async (req, res, next) => {
   try {
-    const lastFiveArticles = await tables.articles.lastFive();
-    res.json(lastFiveArticles);
+    const lastFiveArticleswithAuthor =
+      await tables.articles.lastFiveWithAuthor();
+    res.json(lastFiveArticleswithAuthor);
   } catch (err) {
     next(err);
   }
@@ -49,5 +54,5 @@ module.exports = {
   browse,
   read,
   add,
-  browseLastFive,
+  browseLastFiveWithAuthor,
 };
