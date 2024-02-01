@@ -2,7 +2,6 @@
 import { useState } from "react";
 import axios from "axios";
 import ReactQuill from "react-quill";
-import Navbar from "../components/Navbar";
 import "../styles/createArticle.scss";
 import "react-quill/dist/quill.snow.css";
 
@@ -12,7 +11,6 @@ function CreateArticle() {
   const [article, setArticle] = useState({
     titre: "",
     contenu: "",
-    auteur: "",
     datePublication: "",
     imageUrl: "",
   });
@@ -72,13 +70,6 @@ function CreateArticle() {
               placeholder="Titre"
               onChange={handleChange}
             />
-            <input
-              className="border p-2 rounded-md mb-4"
-              type="text"
-              name="auteur"
-              placeholder="Auteur"
-              onChange={handleChange}
-            />
             <div className="flex items-center justify-center gap-14">
               <div className="flex flex-col mb-4">
                 <label
@@ -113,9 +104,9 @@ function CreateArticle() {
               </div>
             </div>
           </div>
-          <div className="textArea col-span-2">
+          <div className="textArea col-span-2 ">
             <ReactQuill
-              className="quill h-full"
+              className="quill h-full sm:h-96"
               value={article.contenu}
               onChange={handleQuillChange}
               theme="snow"

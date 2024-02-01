@@ -25,7 +25,17 @@ input,
     cursor: pointer;
   }
 }
+.ql-toolbar {
+  border-radius: 10px;
+}
 
-.quill {
-  border-radius: 5%;
+.ql-container,
+.ql-editor .ql-blank .ql-snow {
+  border-radius: 10px;
+  box-shadow: 0.5px 0.5px 0.5px 0.5px rgb(167, 167, 167);
+}
+@media screen and (max-width: 768px) {
+  .ql-container {
+    height: 300px !important;
+  }
 }

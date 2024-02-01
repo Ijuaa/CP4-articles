@@ -1,11 +1,17 @@
 import { useState } from "react";
-import { Link } from "react-router-dom"; // Assurez-vous que react-router-dom est installé
+import { Link, useNavigate } from "react-router-dom"; // Assurez-vous que react-router-dom est installé
+import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
+import { useAuth } from "../contexts/AuthContext";
+
+import "react-toastify/dist/ReactToastify.css";
 
 function Login() {
   const [pseudo, setPseudo] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleChange = (e) => {
     if (e.target.name === "pseudo") setPseudo(e.target.value);
@@ -15,23 +21,35 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-//penser a ajouter toastify 
+
     if (password !== confirmPassword) {
-      console.alert("Les mots de passe ne correspondent pas."); //penser a ajouter toastify 
+      toast.error("Les mots de passe ne correspondent pas.");
       return;
     }
-//penser a ajouter toastify 
+
     try {
-      const response = await axios.post("/api/login", { pseudo, password });
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/login`,
+        { pseudo, password }
+      );
       const { accessToken } = response.data;
-      localStorage.setItem("accessToken", accessToken);
+      login(accessToken);
+      toast.success("Connexion réussie");
+      navigate("/");
     } catch (error) {
-      console.info(`Échec de la connexion: ${error.response.data.message}`);
+      toast.error(
+        `Échec de la connexion: ${
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+        }`
+      );
     }
   };
 
   return (
     <div>
+      <ToastContainer />
       <form onSubmit={handleSubmit}>
         <input
           type="text"

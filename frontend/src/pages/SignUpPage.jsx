@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
 
 function SignUp() {
   const [pseudo, setPseudo] = useState("");
@@ -13,7 +14,7 @@ function SignUp() {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      alert("Les mots de passe ne correspondent pas.");
+      toast.error("Les mots de passe ne correspondent pas.");
       return;
     }
 
@@ -23,14 +24,22 @@ function SignUp() {
         email,
         password,
       });
-      navigate("/login");
+      toast.success("Inscription réussie", {
+        autoClose: 2000,
+        onClose: () => navigate("/login"),
+      });
     } catch (error) {
-      alert(`Erreur lors de l'inscription: ${error.message}`);
+      toast.error(
+        `Erreur lors de l'inscription: ${
+          error.response.data.message || error.message
+        }`
+      );
     }
   };
 
   return (
     <div>
+      <ToastContainer />
       <h2>Inscription</h2>
       <form onSubmit={handleSubmit}>
         <input
@@ -39,6 +48,7 @@ function SignUp() {
           onChange={(e) => setPseudo(e.target.value)}
           placeholder="Pseudo"
           required
+          name="pseudo"
         />
         <input
           type="email"
@@ -46,6 +56,7 @@ function SignUp() {
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Email"
           required
+          name="email"
         />
         <input
           type="password"
@@ -53,6 +64,7 @@ function SignUp() {
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Mot de passe"
           required
+          name="password"
         />
         <input
           type="password"
@@ -60,6 +72,7 @@ function SignUp() {
           onChange={(e) => setConfirmPassword(e.target.value)}
           placeholder="Confirmer le mot de passe"
           required
+          name="confirmPassword"
         />
         <button type="submit">S'inscrire</button>
       </form>
