@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import { useState } from "react";
 import axios from "axios";
 import ReactQuill from "react-quill";
@@ -5,13 +6,14 @@ import Navbar from "../components/Navbar";
 import "../styles/createArticle.scss";
 import "react-quill/dist/quill.snow.css";
 
+import uploadImg from "../assets/uplo.svg";
+
 function CreateArticle() {
   const [article, setArticle] = useState({
     titre: "",
     contenu: "",
     auteur: "",
     datePublication: "",
-    categorie: "",
     imageUrl: "",
   });
 
@@ -54,7 +56,6 @@ function CreateArticle() {
 
   return (
     <div className="App">
-      <Navbar />
       <h1 className="text-3xl font-bold mb-6 mt-6 text-center">
         Créer un nouvel article
       </h1>
@@ -78,38 +79,46 @@ function CreateArticle() {
               placeholder="Auteur"
               onChange={handleChange}
             />
-            <div className="flex flex-col mb-4">
-              <label htmlFor="image" className="mb-2 font-semibold">
-                Image
-              </label>
-              <input
-                className="border p-1 rounded-md"
-                type="file"
-                name="image"
-                onChange={handleChange}
-              />
-            </div>
-            <div className="flex flex-col md:flex-row">
-              <div className="flex flex-col mr-4">
-                <label htmlFor="categorie" className="mb-2 font-semibold">
-                  Catégorie
-                </label>
-                <select
-                  name="categorie"
-                  className="border p-2 font-semibold rounded-md"
-                  onChange={handleChange}
+            <div className="flex items-center justify-center gap-14">
+              <div className="flex flex-col mb-4">
+                <label
+                  htmlFor="image"
+                  className="label-img mb-2 font-semibold mt-8 w-16"
                 >
-                  <option value="JV">Jeux vidéo</option>
-                  <option value="Tech">Tech</option>
-                </select>
+                  <img src={uploadImg} alt="" />
+                </label>
+                <input
+                  id="image"
+                  className="border p-1 rounded-md"
+                  type="file"
+                  name="image"
+                  onChange={handleChange}
+                  hidden
+                />
+              </div>
+              <div className="flex flex-col md:flex-row">
+                <div className="flex flex-col mr-4">
+                  <label htmlFor="categorie" className="mb-2 font-semibold">
+                    Catégorie
+                  </label>
+                  <select
+                    name="categorie"
+                    className="border p-2 font-semibold rounded-md"
+                    onChange={handleChange}
+                  >
+                    <option value="JV">Jeux vidéo</option>
+                    <option value="Tech">Tech</option>
+                  </select>
+                </div>
               </div>
             </div>
           </div>
           <div className="textArea col-span-2">
             <ReactQuill
-              className="h-full"
+              className="quill h-full"
               value={article.contenu}
               onChange={handleQuillChange}
+              theme="snow"
             />
           </div>
           <button
