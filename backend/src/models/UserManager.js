@@ -7,9 +7,10 @@ class UserManager extends AbstractManager {
   }
 
   async create(user) {
+    const hashedPassword = await bcrypt.hash(user.password, 10);
     const [result] = await this.database.query(
       `insert into ${this.table} (pseudo, email, password) values (?, ?, ?)`,
-      [user.pseudo, user.email, user.password]
+      [user.pseudo, user.email, user.password, hashedPassword]
     );
     return result.insertId;
   }
@@ -41,7 +42,12 @@ class UserManager extends AbstractManager {
       [pseudo]
     );
     if (result.length && (await bcrypt.compare(password, result[0].password))) {
-      return result[0];
+      const user = result[0];
+      return {
+        id: user.id,
+        pseudo: user.pseudo,
+        role: user.role,
+      };
     }
     return null;
   }

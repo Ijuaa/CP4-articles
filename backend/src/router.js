@@ -1,7 +1,7 @@
 const express = require("express");
 
 const router = express.Router();
-
+const verifyAdmin = require("./middlewares/verifyAdmin");
 const uploadFile = require("./middlewares/multer");
 /* ************************************************************************* */
 // Define Your API Routes Here
@@ -37,5 +37,6 @@ router.get("/users/:id", userControllers.read);
 router.get("/users/pseudo/:pseudo", userControllers.userPseudoFinder);
 router.post("/users", userControllers.add);
 /* ************************************************************************* */
+/* router.get("/admin", verifyAdmin, */ // ????? plus tard
 
 module.exports = router;

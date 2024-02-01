@@ -49,9 +49,15 @@ const userLogin = async (req, res) => {
   const { pseudo, password } = req.body;
   const user = await tables.utilisateurs.validatelogin(pseudo, password);
   if (user) {
+    const tokenPayload = {
+      id: user.id,
+      pseudo: user.pseudo,
+      role: user.role,
+    };
     const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
     return res.status(200).json({ accessToken });
   }
+  return res.status(401).json({ erreur: "Mauvais pseudo ou mot de passe" });
 };
 module.exports = {
   browse,

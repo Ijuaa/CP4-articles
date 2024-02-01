@@ -1,5 +1,6 @@
 import adventurers404 from "../assets/adventurers404.png";
 import "../styles/page404.scss";
+
 export default function page404() {
   return (
     <div className="container404 flex justify-center items-center h-screen">

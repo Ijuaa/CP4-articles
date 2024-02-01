@@ -45,6 +45,7 @@ function Home() {
                       </h2>
                     </div>
                     <div
+                      className="contenu-wrapper min-w-[1086px] mb-20"
                       // eslint-disable-next-line react/no-danger
                       dangerouslySetInnerHTML={{
                         __html: DOMPurify.sanitize(article.contenu),
@@ -53,7 +54,7 @@ function Home() {
                   </div>
                 </div>
                 <p>{article.auteur}</p>
-                <p>{formatDate(`${article.date_publication}`)}</p>
+                <p className="flex flex-row-reverse">{formatDate(`${article.date_publication}`)}</p>
               </li>
             </div>
           ))}
