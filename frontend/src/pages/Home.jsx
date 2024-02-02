@@ -1,7 +1,7 @@
+/* eslint-disable react/no-danger */
 import { useState, useEffect } from "react";
 import DOMPurify from "dompurify";
 
-import Navbar from "../components/Navbar";
 import backEnd from "../services/backEnd";
 import "../styles/home.scss";
 
@@ -12,6 +12,7 @@ function Home() {
     backEnd
       .get("/articles-home")
       .then((res) => {
+        console.log(res.data);
         setLatestArticles(res.data);
       })
       .catch((err) => {
@@ -24,39 +25,38 @@ function Home() {
   };
 
   return (
-    <div>
-      <div className="home-wrapper container absolute ml-[15%]">
+    <div className="divSa">
+      <div className="home-wrapper flex justify-center mx-auto md:w-[1400px]">
         <ul>
+          <p className="pt-2 pb-0 mb-0 text-xs">Nos 5 derniers articles :</p>
           {latestArticles.map((article) => (
-            <div className="uniArticle mt-5">
-              <li key={article.id}>
-                <div className="frame-article flex justify-center items-center">
-                  <img
-                    className="w-96 h-1/3 mr-10 ml-6"
-                    src={`${import.meta.env.VITE_BACKEND_URL}${
-                      article.image_url
-                    }`}
-                    alt={article.titre}
+            <li key={article.id} className="uniArticle mt-1 mb-4">
+              <div className="frame-article flex flex-col md:flex-row items-center md:items-start ">
+                <img
+                  className="imgArt w-96 mr-10"
+                  src={`${import.meta.env.VITE_BACKEND_URL}${
+                    article.image_url
+                  }`}
+                  alt={article.titre}
+                />
+                <div className="text-center md:text-left mt-4 md:mt-0 md:max-w-[80%]">
+                  <h2 className="font-extrabold text-2xl mb-4 pl-10 pt-8 underline">
+                    {article.titre}
+                  </h2>
+                  <p className="mb-2 ml-8">Par : {article.auteur_pseudo}</p>
+                  <div
+                    className="contenu-wrapper overflow-auto p-8"
+                    dangerouslySetInnerHTML={{
+                      __html: DOMPurify.sanitize(article.contenu),
+                    }}
                   />
-                  <div className="max-w-[80%] mt-10 max-h-screen overflow-auto">
-                    <div className="titre-wrapper flex justify-center mb-4 items-center">
-                      <h2 className="font-extrabold text-xl w-80">
-                        {article.titre}
-                      </h2>
-                    </div>
-                    <div
-                      className="contenu-wrapper min-w-[1086px] mb-20"
-                      // eslint-disable-next-line react/no-danger
-                      dangerouslySetInnerHTML={{
-                        __html: DOMPurify.sanitize(article.contenu),
-                      }}
-                    />
-                  </div>
+                  <p>{article.auteur}</p>
+                  <p className="flex mr-5 mb-2 md:flex-row-reverse justify-center md:justify-start">
+                    {formatDate(`${article.date_publication}`)}
+                  </p>
                 </div>
-                <p>{article.auteur}</p>
-                <p className="flex flex-row-reverse">{formatDate(`${article.date_publication}`)}</p>
-              </li>
-            </div>
+              </div>
+            </li>
           ))}
         </ul>
       </div>

@@ -54,11 +54,12 @@ const userLogin = async (req, res) => {
       pseudo: user.pseudo,
       role: user.role,
     };
-    const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
+    const accessToken = jwt.sign(tokenPayload, process.env.ACCESS_TOKEN_SECRET);
     return res.status(200).json({ accessToken });
   }
   return res.status(401).json({ erreur: "Mauvais pseudo ou mot de passe" });
 };
+
 module.exports = {
   browse,
   read,

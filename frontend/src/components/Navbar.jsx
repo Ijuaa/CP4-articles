@@ -1,22 +1,65 @@
 import { Link } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 import logo from "../assets/logo.png";
+import plume from "../assets/plume.png";
+
 import "../styles/Navbar.scss";
 
 function Navbar() {
+  const { user, logout } = useAuth();
+
   return (
-    <nav className="nav">
-      <Link to="/">
-        <img href="/" className="imgLogo" src={logo} alt="logo" />
-      </Link>
-      <ul>
-        <li>
-          <a href="/create">Create</a>
-        </li>
-        <Link to="/login">
-          <li>Login</li>
-        </Link>
-      </ul>
-    </nav>
+    <div>
+      <nav className="nav bg-[#100b1a] text-white flex justify-between items-center p-4 md:w-[1400px] mx-auto">
+        <div className="flex items-center justify-start flex-grow">
+          <Link to="/">
+            <img className="imgLogo" src={logo} alt="logo" />
+          </Link>
+        </div>
+        {!user ? (
+          <h1 className="titre-site text-3xl text-center mx-auto">
+            Mon super site
+          </h1>
+        ) : null}
+        <div className="flex items-center justify-end flex-grow">
+          <ul className="flex items-center justify-end">
+            <li>
+              <Link to="/articles" className="pr-4">
+                Tous les articles
+              </Link>
+            </li>
+            {user && (
+              <li>
+                <div className="pr-20">
+                  <Link to="/create">
+                    <img
+                      className="plume w-32"
+                      src={plume}
+                      alt="Ecrire un nouvel article"
+                    />
+                    <p className="pl-4 text-s">Nouvel article</p>
+                  </Link>
+                </div>
+              </li>
+            )}
+            {user ? (
+              <div>
+                <li>Bonjour {user.pseudo}</li>
+                <li>
+                  <button className="text-xs" type="button" onClick={logout}>
+                    Déconnexion
+                  </button>
+                </li>
+              </div>
+            ) : (
+              <li className="p-4">
+                <Link to="/login">Login</Link>
+              </li>
+            )}
+          </ul>
+        </div>
+      </nav>
+    </div>
   );
 }
 

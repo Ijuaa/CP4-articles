@@ -1,18 +1,21 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+
 import axios from "axios";
 import ReactQuill from "react-quill";
-import Navbar from "../components/Navbar";
 import "../styles/createArticle.scss";
 import "react-quill/dist/quill.snow.css";
 
 import uploadImg from "../assets/uplo.svg";
 
 function CreateArticle() {
+  const navigate = useNavigate();
+
   const [article, setArticle] = useState({
     titre: "",
     contenu: "",
-    auteur: "",
     datePublication: "",
     imageUrl: "",
   });
@@ -38,24 +41,35 @@ function CreateArticle() {
         formData.append(key, article[key]);
       }
     }
+    const token = localStorage.getItem("token");
 
-    try {
-      await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/articles`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-    } catch (err) {
-      console.error(err);
+    if (token) {
+      try {
+        await axios.post(
+          `${import.meta.env.VITE_BACKEND_URL}/api/articles`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        toast.success("Article crée avec succès", {
+          autoClose: 3000,
+          onClose: () => navigate("/"),
+        });
+      } catch (err) {
+        console.error(err);
+      }
+    } else {
+      console.error("No token found");
     }
   };
 
   return (
     <div className="App">
+      <ToastContainer />
       <h1 className="text-3xl font-bold mb-6 mt-6 text-center">
         Créer un nouvel article
       </h1>
@@ -70,13 +84,6 @@ function CreateArticle() {
               type="text"
               name="titre"
               placeholder="Titre"
-              onChange={handleChange}
-            />
-            <input
-              className="border p-2 rounded-md mb-4"
-              type="text"
-              name="auteur"
-              placeholder="Auteur"
               onChange={handleChange}
             />
             <div className="flex items-center justify-center gap-14">
@@ -113,9 +120,9 @@ function CreateArticle() {
               </div>
             </div>
           </div>
-          <div className="textArea col-span-2">
+          <div className="textArea col-span-2 ">
             <ReactQuill
-              className="quill h-full"
+              className="quill h-full sm:h-96"
               value={article.contenu}
               onChange={handleQuillChange}
               theme="snow"

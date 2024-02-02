@@ -1,8 +1,9 @@
 const express = require("express");
 
 const router = express.Router();
-const verifyAdmin = require("./middlewares/verifyAdmin");
+/* const verifyAdmin = require("./middlewares/verifyAdmin"); */
 const uploadFile = require("./middlewares/multer");
+const jwtMiddleware = require("./middlewares/jwt");
 /* ************************************************************************* */
 // Define Your API Routes Here
 /* ************************************************************************* */
@@ -23,10 +24,15 @@ router.post("/items", itemControllers.add);
 
 const articleControllers = require("./controllers/articlesControllers");
 
-router.get("/articles", articleControllers.browse);
-router.get("/articles/:id", articleControllers.read);
-router.get("/articles-home", articleControllers.browseLastFive);
-router.post("/articles", uploadFile.single("image"), articleControllers.add);
+router.get("/articles", articleControllers.browseWithAuthors);
+router.get("/articles/:id", articleControllers.readWithAuthor);
+router.get("/articles-home", articleControllers.browseLastFiveWithAuthor);
+router.post(
+  "/articles",
+  jwtMiddleware,
+  uploadFile.single("image"),
+  articleControllers.add
+);
 
 /* ************************************************************************* */
 
@@ -36,6 +42,8 @@ router.get("/users", userControllers.browse);
 router.get("/users/:id", userControllers.read);
 router.get("/users/pseudo/:pseudo", userControllers.userPseudoFinder);
 router.post("/users", userControllers.add);
+
+router.post("/login", userControllers.userLogin);
 /* ************************************************************************* */
 /* router.get("/admin", verifyAdmin, */ // ????? plus tard
 

@@ -2,12 +2,42 @@ img {
     width: 12em;
 }
 
-.uniArticle {
-    border: 1px solid rgb(39, 37, 37, 0.5);
+body {
+    background-image: url("../assets/background2opac25.png");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
-.frame-article {
-    background-image: url("../assets/background1-t.png");
-    background-size: 100% 100%;
-;
+.uniArticle{
+    border: 1px solid rgb(39, 37, 37, 0.5);
+    border-radius: 2%;
+    background-color: #f4f3f0;
+    .frame-article {
+        background-image: url("../assets/background2opac25.png");
+        background-position: center;
+        z-index: 100;
+        transition: background-image 1s ease-in-out;
+        border-radius: 2%;
+        @media screen and (min-width: 768px){
+            background-position: 0% 0% !important; 
+        }
+    }
+    .frame-article:hover {
+        background-image: url("../assets/background2opac50.png");
+        z-index: 100;
+    }
+    .frame-article img {
+        transition: transform 3s ease-in-out;
+    }
+    .frame-article:hover img {
+        transform: scale(1.09);
+    }
 }
+
+.imgArt {
+    border-radius: 11%;
+    margin-top: 5%;
+    margin-left: 4%;
+}
+

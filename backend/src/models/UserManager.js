@@ -10,7 +10,7 @@ class UserManager extends AbstractManager {
     const hashedPassword = await bcrypt.hash(user.password, 10);
     const [result] = await this.database.query(
       `insert into ${this.table} (pseudo, email, password) values (?, ?, ?)`,
-      [user.pseudo, user.email, user.password, hashedPassword]
+      [user.pseudo, user.email, hashedPassword]
     );
     return result.insertId;
   }
