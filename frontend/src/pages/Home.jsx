@@ -36,7 +36,7 @@ function Home() {
     <div className="divSa">
       <div className="home-wrapper flex justify-center mx-auto md:w-[1400px]">
         <ul>
-          <p className="pt-2 pb-0 mb-0 text-xs">Nos 5 derniers articles :</p>
+          <p className="pt-0.5 pb-0 mb-0 text-xs">Nos 5 derniers articles :</p>
           {latestArticles.map((article) => (
             // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
             <li

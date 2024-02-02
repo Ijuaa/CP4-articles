@@ -3,7 +3,7 @@ img {
 }
 
 body {
-  background-image: url("../assets/background2opac25.png");
+  background-image: url("../assets/background2opac25fondBody.png");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -51,9 +51,9 @@ body {
   }
 
   .contenu-wrapper {
-    max-height: 695px; // <------ Ici pour cacher le contenu trop long, à modifier selon taille de l'image la plus grande i guess, a voir
+    max-height: 650px; // <------ Ici pour cacher le contenu trop long, à modifier selon taille de l'image la plus grande i guess, a voir
     overflow: hidden;
-    transition: max-height 2s ease-in-out;
+    transition: max-height 2s ease;
   }
 
   &.expanded .contenu-wrapper {
