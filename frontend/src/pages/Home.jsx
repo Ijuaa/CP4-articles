@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react";
 import DOMPurify from "dompurify";
 
-import Navbar from "../components/Navbar";
 import backEnd from "../services/backEnd";
 import "../styles/home.scss";
 
@@ -13,7 +12,7 @@ function Home() {
     backEnd
       .get("/articles-home")
       .then((res) => {
-        console.log(res.data);
+        console.log(res.data);  
         setLatestArticles(res.data);
       })
       .catch((err) => {
@@ -33,7 +32,7 @@ function Home() {
             <li key={article.id} className="uniArticle mt-5">
               <div className="frame-article flex flex-col md:flex-row items-center md:items-start ">
                 <img
-                  className="imgArt w-96 md:mr-10"
+                  className="imgArt w-96 mr-10"
                   src={`${import.meta.env.VITE_BACKEND_URL}${
                     article.image_url
                   }`}

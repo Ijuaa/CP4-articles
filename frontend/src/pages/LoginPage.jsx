@@ -48,35 +48,77 @@ function Login() {
   };
 
   return (
-    <div>
-      <ToastContainer />
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="pseudo"
-          value={pseudo}
-          onChange={handleChange}
-          placeholder="Pseudo"
-        />
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handleChange}
-          placeholder="Mot de passe"
-        />
-        <input
-          type="password"
-          name="confirmPassword"
-          value={confirmPassword}
-          onChange={handleChange}
-          placeholder="Confirmer le mot de passe"
-        />
-        <button type="submit">Connexion</button>
-      </form>
-      <p>
-        Vous n'avez pas de compte ? <Link to="/signup">Créer un compte</Link>
-      </p>
+    <div className="mt-20 flex flex-col items-center justify-center">
+      <ToastContainer position="top-center" autoClose={5000} />
+      <div className="bg-white shadow-2xl rounded-2xl px-8 pt-6 pb-8 mb-4 flex flex-col">
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-1"
+              htmlFor="pseudo"
+            >
+              Pseudo
+            </label>
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="pseudo"
+              type="text"
+              placeholder="Pseudo"
+              name="pseudo"
+              value={pseudo}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-1"
+              htmlFor="password"
+            >
+              Mot de passe
+            </label>
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              id="password"
+              type="password"
+              placeholder="********"
+              name="password"
+              value={password}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="mb-6">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="confirmPassword"
+            >
+              Confirmer le mot de passe
+            </label>
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="confirmPassword"
+              type="password"
+              placeholder="********"
+              name="confirmPassword"
+              value={confirmPassword}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="flex items-center flex-col">
+            <button
+              className=" hover:bg-slate-800 hover:text-slate-100 font-bold py-2 px-2 text-lg rounded focus:outline-none focus:shadow-outline"
+              type="submit"
+            >
+              Connexion
+            </button>
+            <Link
+              to="/signup"
+              className="inline-block align-baseline font-bold text-sm text-gray-800 hover:text-slate-800"
+            >
+              Créer un compte
+            </Link>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

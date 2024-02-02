@@ -1,5 +1,8 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+
 import axios from "axios";
 import ReactQuill from "react-quill";
 import "../styles/createArticle.scss";
@@ -8,6 +11,8 @@ import "react-quill/dist/quill.snow.css";
 import uploadImg from "../assets/uplo.svg";
 
 function CreateArticle() {
+  const navigate = useNavigate();
+
   const [article, setArticle] = useState({
     titre: "",
     contenu: "",
@@ -50,6 +55,10 @@ function CreateArticle() {
             },
           }
         );
+        toast.success("Article crée avec succès", {
+          autoClose: 3000,
+          onClose: () => navigate("/"),
+        });
       } catch (err) {
         console.error(err);
       }
@@ -60,6 +69,7 @@ function CreateArticle() {
 
   return (
     <div className="App">
+      <ToastContainer />
       <h1 className="text-3xl font-bold mb-6 mt-6 text-center">
         Créer un nouvel article
       </h1>

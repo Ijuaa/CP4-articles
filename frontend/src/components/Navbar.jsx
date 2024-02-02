@@ -16,9 +16,11 @@ function Navbar() {
             <img className="imgLogo" src={logo} alt="logo" />
           </Link>
         </div>
-        <h1 className="titre-site text-3xl text-center mx-auto">
-          Mon super site
-        </h1>
+        {!user ? (
+          <h1 className="titre-site text-3xl text-center mx-auto">
+            Mon super site
+          </h1>
+        ) : null}
         <div className="flex items-center justify-end flex-grow">
           <ul className="flex items-center justify-end">
             {user && (
