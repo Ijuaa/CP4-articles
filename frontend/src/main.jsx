@@ -9,6 +9,8 @@ import Home from "./pages/Home";
 import Page404 from "./pages/Page404";
 import LoginPage from "./pages/LoginPage";
 import SignUp from "./pages/SignUpPage";
+import AllArticles from "./pages/AllArticles";
+import OneArticle from "./pages/OneArticle";
 
 import "./styles/root.scss";
 
@@ -27,6 +29,8 @@ const router = createBrowserRouter([
       { path: "*", element: <Page404 /> },
       { path: "/login", element: <LoginPage /> },
       { path: "/signup", element: <SignUp /> },
+      { path: "/articles", element: <AllArticles /> },
+      { path: "/articles/:articleId", element: <OneArticle /> },
     ],
   },
 ]);

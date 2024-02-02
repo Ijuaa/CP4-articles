@@ -50,9 +50,33 @@ const browseLastFiveWithAuthor = async (req, res, next) => {
   }
 };
 
+const browseWithAuthors = async (req, res, next) => {
+  try {
+    const allArticlesWithAuthors = await tables.articles.readAllWithAuthor();
+    res.json(allArticlesWithAuthors);
+  } catch (err) {
+    next(err);
+  }
+};
+
+const readWithAuthor = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const article = await tables.articles.readWithAuthor(id);
+    if (!article) {
+      return res.status(404).json({ message: "Article not found" });
+    }
+    return res.json(article);
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   browse,
   read,
   add,
   browseLastFiveWithAuthor,
+  browseWithAuthors,
+  readWithAuthor,
 };

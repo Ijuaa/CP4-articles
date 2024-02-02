@@ -12,7 +12,7 @@ function Home() {
     backEnd
       .get("/articles-home")
       .then((res) => {
-        console.log(res.data);  
+        console.log(res.data);
         setLatestArticles(res.data);
       })
       .catch((err) => {
@@ -28,8 +28,9 @@ function Home() {
     <div className="divSa">
       <div className="home-wrapper flex justify-center mx-auto md:w-[1400px]">
         <ul>
+          <p className="pt-2 pb-0 mb-0 text-xs">Nos 5 derniers articles :</p>
           {latestArticles.map((article) => (
-            <li key={article.id} className="uniArticle mt-5">
+            <li key={article.id} className="uniArticle mt-1 mb-4">
               <div className="frame-article flex flex-col md:flex-row items-center md:items-start ">
                 <img
                   className="imgArt w-96 mr-10"
@@ -42,7 +43,7 @@ function Home() {
                   <h2 className="font-extrabold text-2xl mb-4 pl-10 pt-8 underline">
                     {article.titre}
                   </h2>
-                  <p className="mb-2">Par : {article.auteur_pseudo}</p>
+                  <p className="mb-2 ml-8">Par : {article.auteur_pseudo}</p>
                   <div
                     className="contenu-wrapper overflow-auto p-8"
                     dangerouslySetInnerHTML={{

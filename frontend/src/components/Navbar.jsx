@@ -23,8 +23,13 @@ function Navbar() {
         ) : null}
         <div className="flex items-center justify-end flex-grow">
           <ul className="flex items-center justify-end">
+            <li>
+              <Link to="/articles" className="pr-4">
+                Tous les articles
+              </Link>
+            </li>
             {user && (
-              <li className="">
+              <li>
                 <div className="pr-20">
                   <Link to="/create">
                     <img
@@ -39,8 +44,8 @@ function Navbar() {
             )}
             {user ? (
               <div>
-                <li className="">Bonjour {user.pseudo}</li>
-                <li className="">
+                <li>Bonjour {user.pseudo}</li>
+                <li>
                   <button className="text-xs" type="button" onClick={logout}>
                     Déconnexion
                   </button>

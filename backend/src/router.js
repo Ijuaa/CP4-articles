@@ -24,8 +24,8 @@ router.post("/items", itemControllers.add);
 
 const articleControllers = require("./controllers/articlesControllers");
 
-router.get("/articles", articleControllers.browse);
-router.get("/articles/:id", articleControllers.read);
+router.get("/articles", articleControllers.browseWithAuthors);
+router.get("/articles/:id", articleControllers.readWithAuthor);
 router.get("/articles-home", articleControllers.browseLastFiveWithAuthor);
 router.post(
   "/articles",
