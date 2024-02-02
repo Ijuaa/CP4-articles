@@ -45,6 +45,6 @@ router.post("/users", userControllers.add);
 
 router.post("/login", userControllers.userLogin);
 /* ************************************************************************* */
-/* router.get("/admin", verifyAdmin, */ // ????? plus tard
+/* router.get("/admin", verifyAdmin, */ //  plus tard
 
 module.exports = router;

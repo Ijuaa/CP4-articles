@@ -23,7 +23,7 @@ function oneArticle() {
     fetchArticle();
   }, [articleId]);
 
-  if (!article) return <div>Petit problème</div>; //Tout casse si je retire ça
+  if (!article) return <div>Petit problème</div>; // loading plus tard
 
   return (
     <div className="container mx-auto p-4 max-w-[1400px] px-0">

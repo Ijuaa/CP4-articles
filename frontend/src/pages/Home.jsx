@@ -2,11 +2,11 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import DOMPurify from "dompurify";
-import "../styles/home.scss"; // Vérifiez le chemin vers votre fichier SCSS
+import "../styles/home.scss";
 
 function Home() {
   const [latestArticles, setLatestArticles] = useState([]);
-  const [expandedArticleId, setExpandedArticleId] = useState(null); // Stocke l'ID de l'article étendu
+  const [expandedArticleId, setExpandedArticleId] = useState(null);
 
   useEffect(() => {
     const fetchArticles = async () => {
@@ -23,7 +23,6 @@ function Home() {
     fetchArticles();
   }, []);
 
-  // Bascule entre l'état étendu/réduit pour un article
   const toggleArticle = (id) => {
     setExpandedArticleId(expandedArticleId === id ? null : id);
   };
