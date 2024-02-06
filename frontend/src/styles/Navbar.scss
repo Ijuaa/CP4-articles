@@ -6,6 +6,20 @@ nav {
     }
   }
 }
+
+.nav {
+  margin: 5px;
+  border-radius: 10px;
+}
+.imgLogo {
+  width: 12em;
+
+  @media screen and (min-width: 400px) {
+    margin-left: 4em;
+    padding: 1rem;
+  }
+}
+
 /* .imgLogo {
   max-width: 8rem; // Limite la taille maximale pour éviter le rétrécissement extrême
   width: 100%; // Permet au logo de s'adapter à l'espace disponible jusqu'à la taille maximale

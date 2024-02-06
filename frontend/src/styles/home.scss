@@ -1,7 +1,7 @@
-img {
+/* img {
   width: 12em;
 }
-
+ */
 body {
   background-image: url("../assets/background2opac25fondBody.png");
   background-size: cover;
@@ -47,7 +47,7 @@ body {
   margin-bottom: 20px;
 
   &:hover {
-    transform: scale(1.02);
+    transform: scale(1.009);
   }
 
   .contenu-wrapper {

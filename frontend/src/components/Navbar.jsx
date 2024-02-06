@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
-import logo from "../assets/logo.png";
-import plume from "../assets/plume.png";
+import logo from "../assets/LogoTitre2resized.png";
+import pPlume from "../assets/petitePlume.webp";
 
 import "../styles/Navbar.scss";
 
@@ -10,36 +10,32 @@ function Navbar() {
 
   return (
     <div>
-      <nav className="nav bg-[#100b1a] text-white flex justify-between items-center p-4 md:w-[1400px] mx-auto">
+      <nav className="nav bg-[#100b1a] text-white flex justify-between items-center p-2 md:w-[1400px] mx-auto">
         <div className="flex items-center justify-start flex-grow">
           <Link to="/">
             <img className="imgLogo" src={logo} alt="logo" />
           </Link>
         </div>
-        {!user ? (
-          <h1 className="titre-site text-3xl text-center mx-auto">
-            Mon super site
-          </h1>
-        ) : null}
+        {/*         {!user ? (
+          <h1 className="titre-site text-3xl text-center mx-auto">Scriba</h1>
+        ) : null} */}
         <div className="flex items-center justify-end flex-grow">
           <ul className="flex items-center justify-end">
-            <li>
+            <li className="pt-1">
               <Link to="/articles" className="pr-4">
                 Tous les articles
               </Link>
             </li>
             {user && (
-              <li>
-                <div className="pr-20">
-                  <Link to="/create">
-                    <img
-                      className="plume w-32"
-                      src={plume}
-                      alt="Ecrire un nouvel article"
-                    />
-                    <p className="pl-4 text-s">Nouvel article</p>
-                  </Link>
-                </div>
+              <li className="mr-8 pl-4 border-l-2 pr-4 border-r-2">
+                <Link to="/create" className="flex items-center">
+                  <img
+                    className="w-6 pb-6"
+                    src={pPlume}
+                    alt="Écrire un nouvel article"
+                  />
+                  <span className="text-s pl-2">Nouvel article</span>
+                </Link>
               </li>
             )}
             {user ? (

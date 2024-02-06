@@ -1,5 +1,5 @@
-const AbstractManager = require("./AbstractManager");
 const bcrypt = require("bcrypt");
+const AbstractManager = require("./AbstractManager");
 
 class UserManager extends AbstractManager {
   constructor() {
@@ -20,22 +20,6 @@ class UserManager extends AbstractManager {
     return result;
   }
 
-  async read(id) {
-    const [result] = await this.database.query(
-      `SELECT * from ${this.table} WHERE id = ?`,
-      [id]
-    );
-    return result[0];
-  }
-
-  async findUserByPseudo(pseudo) {
-    const [result] = await this.database.query(
-      `SELECT id FROM ${this.table} WHERE pseudo= ?`,
-      [pseudo]
-    );
-    return result.length ? result[0].id : null;
-  }
-
   async validatelogin(pseudo, password) {
     const [result] = await this.database.query(
       `SELECT * FROM ${this.table} WHERE pseudo= ?`,
@@ -50,6 +34,22 @@ class UserManager extends AbstractManager {
       };
     }
     return null;
+  }
+
+  async read(id) {
+    const [result] = await this.database.query(
+      `SELECT * from ${this.table} WHERE id = ?`,
+      [id]
+    );
+    return result[0];
+  }
+
+  async findUserByPseudo(pseudo) {
+    const [result] = await this.database.query(
+      `SELECT id FROM ${this.table} WHERE pseudo= ?`,
+      [pseudo]
+    );
+    return result.length ? result[0].id : null;
   }
 }
 
