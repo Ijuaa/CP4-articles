@@ -1,4 +1,4 @@
-import React, { Children } from "react";
+import React from "react";
 import ReactDOM from "react-dom/client";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -11,6 +11,8 @@ import LoginPage from "./pages/LoginPage";
 import SignUp from "./pages/SignUpPage";
 import AllArticles from "./pages/AllArticles";
 import OneArticle from "./pages/OneArticle";
+import Admin from "./pages/Admin";
+import AdminArticleDetail from "./pages/AdminInspectArticle";
 
 import "./styles/root.scss";
 
@@ -31,6 +33,14 @@ const router = createBrowserRouter([
       { path: "/signup", element: <SignUp /> },
       { path: "/articles", element: <AllArticles /> },
       { path: "/articles/:articleId", element: <OneArticle /> },
+      {
+        path: "/admin",
+        element: <Admin />,
+      },
+      {
+        path: "/admin/articles/:articleId",
+        element: <AdminArticleDetail />,
+      },
     ],
   },
 ]);

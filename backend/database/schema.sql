@@ -33,3 +33,6 @@ create table votes (
   FOREIGN KEY (article_id) REFERENCES articles(id),
   FOREIGN KEY (utilisateur_id) REFERENCES utilisateurs(id)
 );
+
+alter table articles add column isApproved BOOLEAN DEFAULT FALSE;
+

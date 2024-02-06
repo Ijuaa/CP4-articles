@@ -72,6 +72,46 @@ const readWithAuthor = async (req, res, next) => {
   }
 };
 
+const browseAllUnapprovedForAdmin = async (_, res, next) => {
+  try {
+    const unapprovedArticles = await tables.articles.readAllUnapproved();
+    res.json(unapprovedArticles);
+  } catch (err) {
+    next(err);
+  }
+};
+
+const approveArticle = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const success = await tables.articles.approveArticle(id);
+    if (success) {
+      res.status(200).json({ message: "Article approuvé avec succès" });
+    } else {
+      res.status(404).json({ message: "Article non trouvé" });
+    }
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Erreur lors de l'approbation de l'article" });
+    next(error);
+  }
+};
+
+// J'ai conscience de la redondance de cette fonction avec read mais je la garde pour l'instant pour des raisons de clarté
+const readOneArticleToApprove = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const article = await tables.articles.read(id);
+    if (!article) {
+      return res.status(404).json({ message: "Article not found" });
+    }
+    return res.json(article);
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   browse,
   read,
@@ -79,4 +119,7 @@ module.exports = {
   browseLastFiveWithAuthor,
   browseWithAuthors,
   readWithAuthor,
+  browseAllUnapprovedForAdmin,
+  approveArticle,
+  readOneArticleToApprove,
 };

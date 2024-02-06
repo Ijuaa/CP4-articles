@@ -7,6 +7,10 @@ import "../styles/Navbar.scss";
 
 function Navbar() {
   const { user, logout } = useAuth();
+  console.log("User infoNav:", user);
+
+  // Vérification si l'utilisateur est un administrateur
+  const isAdmin = user && user.role === "administrateur";
 
   return (
     <div>
@@ -16,9 +20,6 @@ function Navbar() {
             <img className="imgLogo" src={logo} alt="logo" />
           </Link>
         </div>
-        {/*         {!user ? (
-          <h1 className="titre-site text-3xl text-center mx-auto">Scriba</h1>
-        ) : null} */}
         <div className="flex items-center justify-end flex-grow">
           <ul className="flex items-center justify-end">
             <li className="pt-1">
@@ -26,6 +27,13 @@ function Navbar() {
                 Tous les articles
               </Link>
             </li>
+            {isAdmin && (
+              <li className="pt-1 ">
+                <Link to="/admin" className="pr-4">
+                  Administration
+                </Link>
+              </li>
+            )}
             {user && (
               <li className="mr-8 pl-4 border-l-2 pr-4 border-r-2">
                 <Link to="/create" className="flex items-center">

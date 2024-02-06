@@ -4,6 +4,7 @@ const router = express.Router();
 /* const verifyAdmin = require("./middlewares/verifyAdmin"); */
 const uploadFile = require("./middlewares/multer");
 const jwtMiddleware = require("./middlewares/jwt");
+const verifyAdmin = require("./middlewares/verifyAdmin");
 /* ************************************************************************* */
 // Define Your API Routes Here
 /* ************************************************************************* */
@@ -34,6 +35,42 @@ router.post(
   articleControllers.add
 );
 
+// ------ endpoints Admin ------
+
+router.get(
+  "/admin/articles",
+  jwtMiddleware,
+  verifyAdmin,
+  articleControllers.browseAllUnapprovedForAdmin
+);
+
+router.get(
+  "/admin/articles/:id/approve",
+  jwtMiddleware,
+  verifyAdmin,
+  articleControllers.approveArticle
+);
+
+/* router.delete(
+  "/admin/articles/:id/delete",
+  jwtMiddleware,
+  verifyAdmin,
+  articleControllers.deleteArticle
+); */ // a vérifier
+
+router.get(
+  "/admin/articles/:id",
+  jwtMiddleware,
+  verifyAdmin,
+  articleControllers.readOneArticleToApprove
+);
+
+router.patch(
+  "/admin/articles/:id/approve",
+  jwtMiddleware,
+  verifyAdmin,
+  articleControllers.approveArticle
+);
 /* ************************************************************************* */
 
 const userControllers = require("./controllers/userControllers");
