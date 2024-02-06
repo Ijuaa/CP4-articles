@@ -1,5 +1,5 @@
-const AbstractManager = require("./AbstractManager");
 const bcrypt = require("bcrypt");
+const AbstractManager = require("./AbstractManager");
 
 class UserManager extends AbstractManager {
   constructor() {

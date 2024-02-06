@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import logo from "../assets/LogoTitre2resized.png";
-import plume from "../assets/plume.png";
 import pPlume from "../assets/petitePlume.webp";
 
 import "../styles/Navbar.scss";
