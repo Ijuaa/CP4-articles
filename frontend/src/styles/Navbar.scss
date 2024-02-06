@@ -13,8 +13,8 @@ nav {
 }
 .imgLogo {
   width: 12em;
-
-  @media screen and (min-width: 400px) {
+  margin-left: 0;
+  @media screen and (min-width: 800px) {
     margin-left: 4em;
     padding: 1rem;
   }

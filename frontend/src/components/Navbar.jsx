@@ -10,7 +10,7 @@ function Navbar() {
 
   return (
     <div>
-      <nav className="nav bg-[#100b1a] text-white flex justify-between items-center p-2 md:w-[1400px] mx-auto">
+      <nav className="nav bg-[#100b1a] text-white flex justify-between items-center p-2 pr-4 md:w-[1400px] mx-auto">
         <div className="flex items-center justify-start flex-grow">
           <Link to="/">
             <img className="imgLogo" src={logo} alt="logo" />
