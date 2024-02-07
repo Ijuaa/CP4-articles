@@ -13,6 +13,7 @@ import AllArticles from "./pages/AllArticles";
 import OneArticle from "./pages/OneArticle";
 import Admin from "./pages/Admin";
 import AdminArticleDetail from "./pages/AdminInspectArticle";
+import ProtectedRoutes from "./components/ProtectedRoutes";
 
 import "./styles/root.scss";
 
@@ -35,11 +36,19 @@ const router = createBrowserRouter([
       { path: "/articles/:articleId", element: <OneArticle /> },
       {
         path: "/admin",
-        element: <Admin />,
+        element: (
+          <ProtectedRoutes>
+            <Admin />
+          </ProtectedRoutes>
+        ),
       },
       {
         path: "/admin/articles/:articleId",
-        element: <AdminArticleDetail />,
+        element: (
+          <ProtectedRoutes>
+            <AdminArticleDetail />
+          </ProtectedRoutes>
+        ),
       },
     ],
   },

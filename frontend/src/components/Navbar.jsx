@@ -9,7 +9,6 @@ function Navbar() {
   const { user, logout } = useAuth();
   console.log("User infoNav:", user);
 
-  // Vérification si l'utilisateur est un administrateur
   const isAdmin = user && user.role === "administrateur";
 
   return (
