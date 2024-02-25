@@ -1,4 +1,4 @@
-### Scriba: Une Plateforme de Partage d'Articles
+### 🪶 Scriba: Une Plateforme de Partage d'Articles 🪶
 Bienvenue sur le repository de Scriba, une plateforme conçue pour partager vos pensées, découvertes et créations avec le monde. Scriba est né de l'envie de fournir un espace où chacun peut exprimer sa créativité et partager ses connaissances à travers des articles variés.
 
 ### 🚀 Fonctionnalités
