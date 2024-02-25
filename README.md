@@ -18,18 +18,18 @@ Lancez l'application avec npm start. L'application sera accessible à l'adresse 
 ### 📦 Endpoints API
 Scriba offre une API RESTful pour gérer les articles, les utilisateurs et les sessions. Voici quelques-uns des principaux endpoints :
 
-Articles :
-GET /articles : Récupère tous les articles approuvés.
-POST /articles : Soumet un nouvel article (nécessite une authentification).
-GET /articles/:id : Récupère un article spécifique par son ID.
-Utilisateurs :
+--- Articles :
+- GET /articles : Récupère tous les articles approuvés.
+- POST /articles : Soumet un nouvel article (nécessite une authentification).
+- GET /articles/:id : Récupère un article spécifique par son ID.
 
-POST /users : Crée un nouvel utilisateur (inscription).
-POST /login : Authentifie un utilisateur.
-Administration :
+--- Utilisateurs :
+- POST /users : Crée un nouvel utilisateur (inscription).
+- POST /login : Authentifie un utilisateur.
 
-GET /admin/articles : Liste tous les articles en attente d'approbation (nécessite un rôle d'administrateur).
-PATCH /admin/articles/:id/approve : Approuve un article spécifique (nécessite un rôle d'administrateur).
+--- Administration :
+- GET /admin/articles : Liste tous les articles en attente d'approbation (nécessite un rôle d'administrateur).
+- PATCH /admin/articles/:id/approve : Approuve un article spécifique (nécessite un rôle d'administrateur).
 
 ### 🛡 Sécurité
 La sécurité est une priorité pour Scriba. Nous utilisons JWT pour l'authentification et veillons à protéger les données de nos utilisateurs.
