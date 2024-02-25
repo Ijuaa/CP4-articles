@@ -1,4 +1,4 @@
-import { createContext, useState, useContext, useEffect } from "react";
+import { createContext, useState, useContext, useEffect, useMemo } from "react";
 import { jwtDecode } from "jwt-decode";
 
 const AuthContext = createContext();
@@ -27,10 +27,13 @@ function AuthProvider({ children }) {
     setUser(null);
   };
 
-  return (
-    <AuthContext.Provider value={{ user, login, logout }}>
-      {children}
-    </AuthContext.Provider>
+  return useMemo(
+    () => (
+      <AuthContext.Provider value={{ user, login, logout }}>
+        {children}
+      </AuthContext.Provider>
+    ),
+    [user, login, logout, children]
   );
 }
 
