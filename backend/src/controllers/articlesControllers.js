@@ -112,6 +112,23 @@ const readOneArticleToApprove = async (req, res, next) => {
   }
 };
 
+const deleteArticle = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const successDelete = await tables.articles.deleteArticle(id);
+    if (successDelete) {
+      res.status(200).json({ message: "Article supprimé avec succès" });
+    } else {
+      res.status(404).json({ message: "Article non trouvé" });
+    }
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Erreur lors de la suppression de l'article" });
+    next(error);
+  }
+};
+
 module.exports = {
   browse,
   read,
@@ -122,4 +139,5 @@ module.exports = {
   browseAllUnapprovedForAdmin,
   approveArticle,
   readOneArticleToApprove,
+  deleteArticle,
 };

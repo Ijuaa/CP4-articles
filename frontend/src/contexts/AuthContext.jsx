@@ -7,6 +7,7 @@ const useAuth = () => useContext(AuthContext);
 
 function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -14,6 +15,7 @@ function AuthProvider({ children }) {
       const decodedToken = jwtDecode(token);
       setUser(decodedToken);
     }
+    setIsLoading(false);
   }, []);
 
   const login = (newToken) => {
@@ -29,7 +31,7 @@ function AuthProvider({ children }) {
 
   return useMemo(
     () => (
-      <AuthContext.Provider value={{ user, login, logout }}>
+      <AuthContext.Provider value={{ user, isLoading, login, logout }}>
         {children}
       </AuthContext.Provider>
     ),

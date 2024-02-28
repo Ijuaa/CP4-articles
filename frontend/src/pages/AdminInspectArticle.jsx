@@ -34,14 +34,33 @@ function AdminArticleDetail() {
         `${
           import.meta.env.VITE_BACKEND_URL
         }/api/admin/articles/${articleId}/approve`,
-        {}, // Pas de corps nécessaire pour cette requête
+        {}, // On envoie un objet vide car on a pas besoin de données pour cette requête
         { headers: { Authorization: `Bearer ${token}` } }
       );
       toast.success("Article approuvé avec succès !");
-      navigate("/admin"); // Redirige vers la page admin après approbation
+      navigate("/admin"); // Redirige vers la page d'administration apèrs avoir approuvé l'article.
     } catch (error) {
       console.error("Erreur lors de l'approbation de l'article", error);
       toast.error("Erreur lors de l'approbation de l'article");
+    }
+  };
+
+  const deleteArticle = async () => {
+    const token = localStorage.getItem("token");
+    try {
+      await axios.delete(
+        `${
+          import.meta.env.VITE_BACKEND_URL
+        }/api/admin/articles/${articleId}/delete`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      toast.success("Article supprimé avec succès !");
+      navigate("/admin");
+    } catch (error) {
+      console.error("Erreur lors de la suppression de l'article", error);
+      toast.error("Erreur lors de la suppression de l'article");
     }
   };
 
@@ -74,6 +93,13 @@ function AdminArticleDetail() {
           className="mt-4  bg-slate-500 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded"
         >
           Approuver cet article
+        </button>
+        <button
+          type="button"
+          onClick={deleteArticle}
+          className="mt-4 ml-2 bg-red-400 hover:bg-red-300 text-white font-bold py-2 px-4 rounded"
+        >
+          Supprimer cet article
         </button>
       </div>
     </div>

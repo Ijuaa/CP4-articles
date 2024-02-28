@@ -13,6 +13,7 @@ import uploadImg from "../assets/uplo.svg";
 function CreateArticle() {
   const navigate = useNavigate();
 
+  const [previewImgUrl, setPreviewImgUrl] = useState("");
   const [article, setArticle] = useState({
     titre: "",
     contenu: "",
@@ -23,6 +24,8 @@ function CreateArticle() {
   const handleChange = (e) => {
     if (e.target.name === "image") {
       setArticle({ ...article, [e.target.name]: e.target.files[0] });
+      const fileUrl = URL.createObjectURL(e.target.files[0]);
+      setPreviewImgUrl(fileUrl);
     } else {
       setArticle({ ...article, [e.target.name]: e.target.value });
     }
@@ -55,7 +58,7 @@ function CreateArticle() {
             },
           }
         );
-        toast.success("Article crée avec succès", {
+        toast.success("Article crée avec succès et en attente de modération", {
           autoClose: 3000,
           onClose: () => navigate("/"),
         });
@@ -85,8 +88,10 @@ function CreateArticle() {
               name="titre"
               placeholder="Titre"
               onChange={handleChange}
+              required
             />
             <div className="flex items-center justify-center gap-14">
+              {/* ------------ upload image ------------*/}
               <div className="flex flex-col mb-4">
                 <label
                   htmlFor="image"
@@ -101,8 +106,10 @@ function CreateArticle() {
                   name="image"
                   onChange={handleChange}
                   hidden
+                  required
                 />
               </div>
+              {/* ------------ upload image ------------*/}
               <div className="flex flex-col md:flex-row">
                 <div className="flex flex-col mr-4">
                   <label htmlFor="categorie" className="mb-2 font-semibold">
@@ -119,6 +126,15 @@ function CreateArticle() {
                 </div>
               </div>
             </div>
+            <div>
+              {previewImgUrl && (
+                <img
+                  src={previewImgUrl}
+                  alt="preview"
+                  className="imgArt w-96 pr-4"
+                />
+              )}
+            </div>
           </div>
           <div className="textArea col-span-2 ">
             <ReactQuill
@@ -127,13 +143,13 @@ function CreateArticle() {
               onChange={handleQuillChange}
               theme="snow"
             />
+            <button
+              className="button-envoyer mt-14 ml-40 bg-blue-500 text-white p-2 rounded-md col-span-3 w-96"
+              type="submit"
+            >
+              Envoyer
+            </button>
           </div>
-          <button
-            className="button-envoyer mt-8 bg-blue-500 text-white p-2 rounded-md col-span-3 w-96"
-            type="submit"
-          >
-            Envoyer
-          </button>
         </form>
       </div>
     </div>
