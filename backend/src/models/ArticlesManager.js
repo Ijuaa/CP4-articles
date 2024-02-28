@@ -84,6 +84,14 @@ class ArticlesManager extends AbstractManager {
     return result.affectedRows > 0;
   }
 
+  async deleteArticle(id) {
+    const [result] = await this.database.query(
+      `DELETE FROM ${this.table} WHERE id = ?`,
+      [id]
+    );
+    return result.affectedRows > 0;
+  }
+
   /*   async readOneArticleToApprove(id) {
     const [result] = await this.database.query(
       `SELECT * from ${this.table} WHERE id = ?`,

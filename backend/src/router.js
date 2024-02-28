@@ -51,13 +51,6 @@ router.get(
   articleControllers.approveArticle
 );
 
-/* router.delete(
-  "/admin/articles/:id/delete",
-  jwtMiddleware,
-  verifyAdmin,
-  articleControllers.deleteArticle
-); */ // a vérifier
-
 router.get(
   "/admin/articles/:id",
   jwtMiddleware,
@@ -70,6 +63,13 @@ router.patch(
   jwtMiddleware,
   verifyAdmin,
   articleControllers.approveArticle
+);
+
+router.delete(
+  "/admin/articles/:id/delete",
+  jwtMiddleware,
+  verifyAdmin,
+  articleControllers.deleteArticle
 );
 /* ************************************************************************* */
 
