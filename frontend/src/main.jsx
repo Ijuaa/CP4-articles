@@ -14,6 +14,7 @@ import OneArticle from "./pages/OneArticle";
 import Admin from "./pages/Admin";
 import AdminArticleDetail from "./pages/AdminInspectArticle";
 import ProtectedRoutes from "./components/ProtectedRoutes";
+import VerificationPage from "./pages/VerificationPage";
 
 import "./styles/root.scss";
 
@@ -50,6 +51,7 @@ const router = createBrowserRouter([
           </ProtectedRoutes>
         ),
       },
+      { path: "/verify/:token", element: <VerificationPage /> },
     ],
   },
 ]);

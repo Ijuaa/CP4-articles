@@ -25,13 +25,13 @@ const read = async (req, res) => {
 const add = async (req, res) => {
   const user = req.body;
   try {
-    const insertId = await tables.utilisateurs.create(user); // Assurez-vous que cette fonction crée l'utilisateur et retourne son ID
+    const insertId = await tables.utilisateurs.create(user);
     const verificationToken = uuidv4();
 
     await tables.utilisateurs.saveVerificationToken(
       insertId,
       verificationToken
-    ); // Vous devrez écrire cette fonction
+    );
 
     const mailOptions = {
       from: process.env.EMAIL_USER,
@@ -48,11 +48,9 @@ const add = async (req, res) => {
           .json({ error: "Erreur lors de l'envoi de l'email" });
       } else {
         console.log("Email sent: " + info.response);
-        res
-          .status(201)
-          .json({
-            message: "Utilisateur créé et email de vérification envoyé",
-          });
+        res.status(201).json({
+          message: "Utilisateur créé et email de vérification envoyé",
+        });
       }
     });
   } catch (error) {
@@ -93,15 +91,19 @@ const userLogin = async (req, res) => {
 const verifyEmail = async (req, res) => {
   const { token } = req.params;
   try {
+    // pour chhercher l'utilisateur par le token de vérification
     const userId = await tables.utilisateurs.findUserByVerificationToken(token);
-    if (userId === null) {
-      return res.status(404).json({ error: "Aucun utilisateur trouvé" });
+    if (!userId) {
+      return res.status(404).send("Token invalide ou expiré.");
     }
+
+    // pour amrquer l'utilisateur comme vérifié
     await tables.utilisateurs.markEmailAsVerified(userId);
-    return res.status(200).json({ message: "Utilisateur vérifié" });
+
+    res.send("Compte vérifié avec succès !");
   } catch (error) {
-    console.error(error);
-    return res.status(500).json({ error });
+    console.error(`Erreur lors de la vérification : ${error}`);
+    res.status(500).send("Erreur lors de la vérification.");
   }
 };
 

@@ -58,6 +58,21 @@ class UserManager extends AbstractManager {
       [verificationToken, userId]
     );
   }
+
+  async findUserByVerificationToken(verificationToken) {
+    const [result] = await this.database.query(
+      `SELECT id FROM ${this.table} WHERE verificationToken= ?`,
+      [verificationToken]
+    );
+    return result.length ? result[0].id : null;
+  }
+
+  async markEmailAsVerified(userId) {
+    await this.database.query(
+      `UPDATE ${this.table} SET emailVerified = 1 WHERE id = ?`,
+      [userId]
+    );
+  }
 }
 
 module.exports = UserManager;

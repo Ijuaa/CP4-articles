@@ -9,6 +9,8 @@ const verifyAdmin = require("./middlewares/verifyAdmin");
 // Define Your API Routes Here
 /* ************************************************************************* */
 
+// ------ endpoints Articles ------
+
 const articleControllers = require("./controllers/articlesControllers");
 
 router.get("/articles", articleControllers.browseWithAuthors);
@@ -57,7 +59,8 @@ router.delete(
   verifyAdmin,
   articleControllers.deleteArticle
 );
-/* ************************************************************************* */
+
+// ------ endpoints Users ------
 
 const userControllers = require("./controllers/userControllers");
 
@@ -67,6 +70,11 @@ router.get("/users/pseudo/:pseudo", userControllers.userPseudoFinder);
 router.post("/users", userControllers.add);
 
 router.post("/login", userControllers.userLogin);
+
+// verify email
+router.get("/verify/:token", userControllers.verifyEmail);
+
 /* ************************************************************************* */
+
 
 module.exports = router;
