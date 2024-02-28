@@ -31,6 +31,7 @@ class UserManager extends AbstractManager {
         id: user.id,
         pseudo: user.pseudo,
         role: user.role,
+        emailVerified: user.emailVerified,
       };
     }
     return null;

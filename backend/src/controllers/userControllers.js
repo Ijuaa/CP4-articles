@@ -46,12 +46,11 @@ const add = async (req, res) => {
         return res
           .status(500)
           .json({ error: "Erreur lors de l'envoi de l'email" });
-      } else {
-        console.log("Email sent: " + info.response);
-        res.status(201).json({
-          message: "Utilisateur créé et email de vérification envoyé",
-        });
       }
+      console.info("Email sent: " + info.response);
+      res.status(201).json({
+        message: "Utilisateur créé et email de vérification envoyé",
+      });
     });
   } catch (error) {
     console.error(error);
@@ -77,15 +76,24 @@ const userLogin = async (req, res) => {
   const { pseudo, password } = req.body;
   const user = await tables.utilisateurs.validatelogin(pseudo, password);
   if (user) {
+    if (!user.emailVerified) {
+      return res.status(403).json({
+        message: "Votre compte n'a pas été vérifié. Vérifiez votre email.",
+      });
+    }
     const tokenPayload = {
       id: user.id,
       pseudo: user.pseudo,
       role: user.role,
     };
-    const accessToken = jwt.sign(tokenPayload, process.env.ACCESS_TOKEN_SECRET);
+    const accessToken = jwt.sign(
+      tokenPayload,
+      process.env.ACCESS_TOKEN_SECRET,
+      { expiresIn: "10d" }
+    );
     return res.status(200).json({ accessToken });
   }
-  return res.status(401).json({ erreur: "Mauvais pseudo ou mot de passe" });
+  return res.status(401).json({ message: "Mauvais pseudo ou mot de passe" });
 };
 
 const verifyEmail = async (req, res) => {

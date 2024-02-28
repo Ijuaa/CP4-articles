@@ -32,10 +32,13 @@ function SignUp() {
         }
       );
       if (response.status === 200 || response.status === 201) {
-        toast.success("Inscription réussie", {
-          autoClose: 2000,
-          onClose: () => navigate("/login", { replace: true }),
-        });
+        toast.success(
+          "Inscription réussie, Merci de vérifier votre email pour activer votre compte.",
+          {
+            autoClose: 5000,
+            onClose: () => navigate("/login", { replace: true }),
+          }
+        );
       } else {
         throw new Error("Échec de la création de l'utilisateur");
       }
