@@ -51,6 +51,13 @@ class UserManager extends AbstractManager {
     );
     return result.length ? result[0].id : null;
   }
+
+  async saveVerificationToken(userId, verificationToken) {
+    await this.database.query(
+      `UPDATE ${this.table} SET verificationToken = ? WHERE id = ?`,
+      [verificationToken, userId]
+    );
+  }
 }
 
 module.exports = UserManager;
