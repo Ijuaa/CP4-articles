@@ -76,5 +76,4 @@ router.get("/verify/:token", userControllers.verifyEmail);
 
 /* ************************************************************************* */
 
-
 module.exports = router;
