@@ -36,3 +36,5 @@ create table votes (
 
 alter table articles add column isApproved BOOLEAN DEFAULT FALSE;
 
+ALTER TABLE utilisateurs ADD COLUMN emailVerified BOOLEAN DEFAULT FALSE;
+ALTER TABLE utilisateurs ADD COLUMN verificationToken VARCHAR(255) NULL;

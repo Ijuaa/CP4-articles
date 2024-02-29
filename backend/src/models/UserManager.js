@@ -31,6 +31,7 @@ class UserManager extends AbstractManager {
         id: user.id,
         pseudo: user.pseudo,
         role: user.role,
+        emailVerified: user.emailVerified,
       };
     }
     return null;
@@ -50,6 +51,28 @@ class UserManager extends AbstractManager {
       [pseudo]
     );
     return result.length ? result[0].id : null;
+  }
+
+  async saveVerificationToken(userId, verificationToken) {
+    await this.database.query(
+      `UPDATE ${this.table} SET verificationToken = ? WHERE id = ?`,
+      [verificationToken, userId]
+    );
+  }
+
+  async findUserByVerificationToken(verificationToken) {
+    const [result] = await this.database.query(
+      `SELECT id FROM ${this.table} WHERE verificationToken= ?`,
+      [verificationToken]
+    );
+    return result.length ? result[0].id : null;
+  }
+
+  async markEmailAsVerified(userId) {
+    await this.database.query(
+      `UPDATE ${this.table} SET emailVerified = 1 WHERE id = ?`,
+      [userId]
+    );
   }
 }
 

@@ -41,7 +41,7 @@ function Login() {
         `Échec de la connexion: ${
           error.response && error.response.data.message
             ? error.response.data.message
-            : error.message
+            : "Erreur lors de la connexion"
         }`
       );
     }

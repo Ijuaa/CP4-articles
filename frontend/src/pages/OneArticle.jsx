@@ -45,7 +45,7 @@ function oneArticle() {
         dangerouslySetInnerHTML={{
           __html: DOMPurify.sanitize(article.contenu),
         }}
-       />
+      />
     </div>
   );
 }
