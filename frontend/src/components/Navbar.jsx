@@ -7,7 +7,6 @@ import "../styles/Navbar.scss";
 
 function Navbar() {
   const { user, logout } = useAuth();
-  console.log("User infoNav:", user);
 
   const isAdmin = user && user.role === "administrateur";
 
