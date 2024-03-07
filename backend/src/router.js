@@ -23,6 +23,20 @@ router.post(
   articleControllers.add
 );
 
+// ------ endpoints Users ------
+
+const userControllers = require("./controllers/userControllers");
+
+router.get("/users", userControllers.browse);
+router.get("/users/:id", userControllers.read);
+router.get("/users/pseudo/:pseudo", userControllers.userPseudoFinder);
+router.post("/users", userControllers.add);
+
+router.post("/login", userControllers.userLogin);
+
+// verify email
+router.get("/verify/:token", userControllers.verifyEmail);
+
 // ------ endpoints Admin ------
 
 router.get(
@@ -59,20 +73,6 @@ router.delete(
   verifyAdmin,
   articleControllers.deleteArticle
 );
-
-// ------ endpoints Users ------
-
-const userControllers = require("./controllers/userControllers");
-
-router.get("/users", userControllers.browse);
-router.get("/users/:id", userControllers.read);
-router.get("/users/pseudo/:pseudo", userControllers.userPseudoFinder);
-router.post("/users", userControllers.add);
-
-router.post("/login", userControllers.userLogin);
-
-// verify email
-router.get("/verify/:token", userControllers.verifyEmail);
 
 /* ************************************************************************* */
 

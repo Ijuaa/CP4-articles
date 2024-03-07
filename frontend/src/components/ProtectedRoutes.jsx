@@ -8,10 +8,10 @@ function ProtectedRoutes({ children }) {
 
   useEffect(() => {
     if (!isLoading && !user) {
-      /* Redirection si l'utilisateur n'est pas connecté et le chargement est terminé */
+      /* Si l'utiulisateur n'est pas connecté et que le chargement est fini, alors redirection vers le login */
       navigate("/login");
     } else if (!isLoading && user && user.role !== "administrateur") {
-      /* Si l'utilisateur est chargé et n'est pas un administrateur */
+      /* Si l'utilisateur est chargé et n'est pas un administrateur, il est redirigé vers la 404 */
       navigate("/404");
     }
   }, [user, isLoading, navigate]);

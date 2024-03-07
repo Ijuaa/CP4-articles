@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable react/no-danger */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -37,7 +39,6 @@ function Home() {
         <ul>
           <p className="pt-0.5 pb-0 mb-1 text-xs">Nos 5 derniers articles :</p>
           {latestArticles.map((article) => (
-            // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
             <li
               key={article.id}
               className={`uniArticle ${
@@ -64,7 +65,6 @@ function Home() {
                   <p className="mb-2 ml-8">Par : {article.auteur_pseudo}</p>
                   <div
                     className="contenu-wrapper overflow-auto p-8"
-                    // eslint-disable-next-line react/no-danger
                     dangerouslySetInnerHTML={{
                       __html: DOMPurify.sanitize(article.contenu),
                     }}

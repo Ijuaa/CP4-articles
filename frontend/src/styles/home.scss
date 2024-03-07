@@ -51,7 +51,7 @@ body {
   }
 
   .contenu-wrapper {
-    max-height: 650px; // <------ Ici pour cacher le contenu trop long, à modifier selon taille de l'image la plus grande i guess, a voir
+    max-height: 650px; // <---Ici pour cacher le contenu trop long, à modifier selon taille de l'image la plus grande
     overflow: hidden;
     transition: max-height 2s ease;
   }

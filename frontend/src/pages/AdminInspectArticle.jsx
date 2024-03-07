@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger */
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -38,7 +39,7 @@ function AdminArticleDetail() {
         { headers: { Authorization: `Bearer ${token}` } }
       );
       toast.success("Article approuvé avec succès !");
-      navigate("/admin"); // Redirige vers la page d'administration apèrs avoir approuvé l'article.
+      navigate("/admin"); // Redirige vers la page d'administration apèrs avoir approuvé l'article. !attention à bien importer useNavigate et pas Navigate
     } catch (error) {
       console.error("Erreur lors de l'approbation de l'article", error);
       toast.error("Erreur lors de l'approbation de l'article");
@@ -81,7 +82,6 @@ function AdminArticleDetail() {
         <p className="text-sm text-gray-600">Par : {article.auteur_pseudo}</p>
       </div>
       <div
-        // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{
           __html: DOMPurify.sanitize(article.contenu),
         }}
